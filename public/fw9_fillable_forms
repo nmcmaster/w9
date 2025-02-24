@@ -1,0 +1,38 @@
+Here are the fillable fields in FW9.pdf:
+
+1. **Line 1**: Name of entity/individual (Text field)
+2. **Line 2**: Business name/disregarded entity name (Text field)
+3. **Line 3a**: Tax classification checkboxes (Exclusive selection):
+   - Individual/sole proprietor
+   - C corporation  
+   - S corporation
+   - Partnership
+   - Trust/estate
+   - LLC (with text entry for tax classification)
+   - Other
+4. **Line 3b**: Foreign partners/owners checkbox (Checkbox)
+5. **Line 4**: 
+   - Exempt payee code (Text field)
+   - FATCA exemption code (Text field)
+6. **Line 5**: Address (Text field)
+7. **Line 6**: City, state, ZIP code (Text field)
+8. **Part I**:
+   - Social security number (Text field with formatted input)
+   - Employer identification number (Text field with formatted input)
+9. **Part II**:
+   - Signature field (Digital/Physical signature)
+   - Date field (Date input)
+
+These fields use AcroForms with the following naming conventions:
+- `taxpayer.name` (Line 1)
+- `business.name` (Line 2)
+- `filing_status.[type]` (Line 3a checkboxes)
+- `foreign_partners` (Line 3b)
+- `exempt_payee_code` (Line 4)
+- `fatca_code` (Line 4)
+- `address` (Line 5)
+- `city_state_zip` (Line 6)
+- `ssn` (Part I)
+- `ein` (Part I)
+- `signature` (Part II)
+- `date` (Part II)
