@@ -140,7 +140,7 @@ export default function W9Form() {
         </div>
         <div className="mt-10 space-y-10">
             <fieldset>
-                <legend className="text-sm/6 font-medium text-gray-950">3b. Foreign partners/owners checkbox</legend>
+                <legend className="text-sm/6 font-medium text-gray-950"><span className="font-bold">3b.</span> Foreign partners/owners checkbox</legend>
                 <div className="mt-6 space-y-6">
                     <div className="flex gap-3">
                         <div className="flex h-6 shrink-0 items-center">
@@ -190,47 +190,40 @@ export default function W9Form() {
 
                 </div>
             </fieldset>
-
-            <fieldset>
-                <legend className="text-sm/6 font-semibold text-gray-950">Push notifications</legend>
-                <p className="mt-1 text-sm/6 text-gray-600">These are delivered via SMS to your mobile phone.</p>
-                <div className="mt-6 space-y-6">
-                    <div className="flex items-center gap-x-3">
-                        <input
-                            defaultChecked
-                            id="push-everything"
-                            name="push-notifications"
-                            type="radio"
-                            className="relative size-4 appearance-none rounded-full border border-gray-300 bg-white before:absolute before:inset-1 before:rounded-full before:bg-white not-checked:before:hidden checked:border-indigo-600 checked:bg-indigo-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:before:bg-gray-400 forced-colors:appearance-auto forced-colors:before:hidden"
-                        />
-                        <label htmlFor="push-everything" className="block text-sm/6 font-medium text-gray-950">
-                            Everything
-                        </label>
-                    </div>
-                    <div className="flex items-center gap-x-3">
-                        <input
-                            id="push-email"
-                            name="push-notifications"
-                            type="radio"
-                            className="relative size-4 appearance-none rounded-full border border-gray-300 bg-white before:absolute before:inset-1 before:rounded-full before:bg-white not-checked:before:hidden checked:border-indigo-600 checked:bg-indigo-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:before:bg-gray-400 forced-colors:appearance-auto forced-colors:before:hidden"
-                        />
-                        <label htmlFor="push-email" className="block text-sm/6 font-medium text-gray-950">
-                            Same as email
-                        </label>
-                    </div>
-                    <div className="flex items-center gap-x-3">
-                        <input
-                            id="push-nothing"
-                            name="push-notifications"
-                            type="radio"
-                            className="relative size-4 appearance-none rounded-full border border-gray-300 bg-white before:absolute before:inset-1 before:rounded-full before:bg-white not-checked:before:hidden checked:border-indigo-600 checked:bg-indigo-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:before:bg-gray-400 forced-colors:appearance-auto forced-colors:before:hidden"
-                        />
-                        <label htmlFor="push-nothing" className="block text-sm/6 font-medium text-gray-950">
-                            No push notifications
-                        </label>
-                    </div>
-                </div>
-            </fieldset>
         </div>
+
+        <div className="mt-8 text-sm/6 font-medium text-gray-950">
+            <span className="font-bold">4.</span> Exemptions (codes apply only to certain entities, not individuals):
+        </div>
+        <div className="mt-5 sm:col-span-6">
+            <label htmlFor="last-name" className="block text-sm/6 font-medium text-gray-950">
+                Exempt payee code (if any):
+            </label>
+            <div className="mt-2">
+                <input
+                    id="last-name"
+                    name="last-name"
+                    type="text"
+                    autoComplete="family-name"
+                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                />
+            </div>
+        </div>
+        <div className="mt-4 sm:col-span-6">
+            <label htmlFor="last-name" className="block text-sm/6 font-medium text-gray-950">
+                Exemption from Foreign Account Tax Compliance Act (FATCA) reporting code (if any):
+            </label>
+            <div className="mt-2">
+                <input
+                    id="last-name"
+                    name="last-name"
+                    type="text"
+                    autoComplete="family-name"
+                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                />
+            </div>
+            <div className="mt-1 text-sm/6 text-gray-600">(Applies to accounts maintained outside the United States)</div>
+        </div>
+
     </div>)
 }
