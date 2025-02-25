@@ -1,4 +1,16 @@
+"use client";
+import { useMask, format } from "@react-input/mask";
+
 export default function W9Form() {
+    const ssn = useMask({
+        mask: "___-__-___",
+        replacement: { _: /\d/ },
+    });
+    const ein = useMask({
+        mask: "__-_______",
+        replacement: { _: /\d/ },
+    });
+
     return (
         <div className="border-b border-gray-900/10 pb-12">
             <h2 className="text-base/7 font-semibold text-gray-900">
@@ -254,7 +266,7 @@ export default function W9Form() {
                 Give the Requester for guidelines on whose number to enter.
             </p>
             <div className="mt-2 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                <div className="mt-4 sm:col-span-3">
+                <div className="mt-4 sm:col-span-2">
                     <label
                         htmlFor="last-name"
                         className="block text-sm/6 font-medium text-gray-950"
@@ -263,15 +275,20 @@ export default function W9Form() {
                     </label>
                     <div className="mt-2">
                         <input
+                            ref={ssn}
+                            placeholder="___-__-___"
                             id="last-name"
                             name="last-name"
                             type="text"
-                            autoComplete="family-name"
-                            className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                                                 className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                         />
                     </div>
                 </div>
-                <div className="mt-4 sm:col-span-3">
+
+                <div className="mt-4 text-center font-bold pt-0.5 sm:col-span-2">
+                 OR
+                </div>
+                <div className="mt-4 sm:col-span-2">
                     <label
                         htmlFor="last-name"
                         className="block text-sm/6 font-medium text-gray-950"
@@ -280,10 +297,11 @@ export default function W9Form() {
                     </label>
                     <div className="mt-2">
                         <input
+                            ref={ein}
+                            placeholder="__-_______"
                             id="last-name"
                             name="last-name"
                             type="text"
-                            autoComplete="family-name"
                             className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                         />
                     </div>
