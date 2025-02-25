@@ -2,6 +2,26 @@
 import { useMask, format } from "@react-input/mask";
 import { useForm, SubmitHandler } from "react-hook-form";
 
+export type W9FormData = {
+    taxpayerName: string;
+    businessName: string;
+    taxClassification: string;
+    taxClassificationIsLLC: boolean;
+    llcTaxClassification: string; // C, S, or P
+    foreignPartners: boolean;
+    exemptPayeeCode?: string;
+    classificationIsOther?: string;
+    fatcaCode: string;
+    address: string;
+    cityStateZip: string;
+    accountNumbers?: string;
+    tin: string;
+    tinType: "ssn" | "ein";
+    signature: string;
+    date: string;
+    requesterNameAddress?: string;
+};
+
 export default function W9Form() {
     const ssn = useMask({
         mask: "___-__-___",
@@ -12,28 +32,28 @@ export default function W9Form() {
         replacement: { _: /\d/ },
     });
 
-    type W9FormData = {
-        taxpayerName: string;
-        businessName: string;
-        taxClassification: string;
-        taxClassificationIsLLC: boolean;
-        llcTaxClassification: string; // C, S, or P
-        foreignPartners: boolean;
-        exemptPayeeCode?: string;
-        classificationIsOther?: string; 
-        fatcaCode: string;
-        address: string;
-        cityStateZip: string;
-        accountNumbers?: string;
-        tin: string;
-        tinType: "ssn" | "ein";
-        signature: string;
-        date: string;
-        requesterNameAddress?: string;
+    const {
+        register,
+        handleSubmit,
+        watch,
+        formState: { errors },
+    } = useForm<W9FormData>({
+        defaultValues: { taxClassification: "Individual/sole proprietor" },
+    });
+
+    const onSubmit: SubmitHandler<W9FormData> = (data) => {
+        console.log(data);
+        // handle form submission,
+        alert("Form submitted! Check the console for the data.");
     };
 
+    console.log(watch("taxClassification")); // watch input value
+
     return (
-        <form className="border-b border-gray-900/10 pb-12">
+        <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="border-b border-gray-900/10 pb-12"
+        >
             <h2 className="text-base/7 font-semibold text-gray-900">
                 Create W9 Form
             </h2>
@@ -44,7 +64,7 @@ export default function W9Form() {
             <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                 <div className="sm:col-span-6">
                     <label
-                        htmlFor="first-name"
+                        htmlFor="taxpayerName"
                         className="block text-sm/6 font-medium text-gray-900"
                     >
                         <span className="font-bold">1.</span> Name of
@@ -52,8 +72,9 @@ export default function W9Form() {
                     </label>
                     <div className="mt-2">
                         <input
-                            id="taxpayer-name"
-                            name="taxpayer-name"
+                            {...register("taxpayerName", { required: true })}
+                            id="taxpayerName"
+                            name="taxpayerName"
                             type="text"
                             autoComplete="given-name"
                             className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
@@ -76,10 +97,10 @@ export default function W9Form() {
                     </label>
                     <div className="mt-2">
                         <input
-                            id="last-name"
-                            name="last-name"
+                            id="businessName"
+                            name="businessName"
                             type="text"
-                            autoComplete="family-name"
+                            autoComplete="business-name"
                             className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                         />
                     </div>
@@ -87,7 +108,7 @@ export default function W9Form() {
 
                 <div className="sm:col-span-4">
                     <label
-                        htmlFor="country"
+                        htmlFor="taxClassification"
                         className="block text-sm/6 font-medium text-gray-900"
                     >
                         <span className="font-bold">3a.</span> Check the
@@ -97,9 +118,8 @@ export default function W9Form() {
                     </label>
                     <div className="mt-2 grid grid-cols-1">
                         <select
-                            id="country"
-                            name="country"
-                            autoComplete="country-name"
+                            id="taxClassification"
+                            name="taxClassification"
                             className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                         >
                             <option>Individual/sole proprietor</option>
@@ -124,8 +144,8 @@ export default function W9Form() {
                             <div className="flex h-6 shrink-0 items-center">
                                 <div className="group grid size-4 grid-cols-1">
                                     <input
-                                        id="comments"
-                                        name="comments"
+                                        id="foreignPartners"
+                                        name="foreignPartners"
                                         type="checkbox"
                                         aria-describedby="comments-description"
                                         className="col-start-1 row-start-1 appearance-none rounded-sm border border-gray-300 bg-white checked:border-indigo-600 checked:bg-indigo-600 indeterminate:border-indigo-600 indeterminate:bg-indigo-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:checked:bg-gray-100 forced-colors:appearance-auto"
@@ -154,7 +174,7 @@ export default function W9Form() {
                             </div>
                             <div className="text-sm/6">
                                 <label
-                                    htmlFor="comments"
+                                    htmlFor="foreignPartners"
                                     className="font-medium text-gray-950"
                                 >
                                     If on line 3a you selected “Partnership” or
@@ -179,15 +199,15 @@ export default function W9Form() {
             </div>
             <div className="mt-5 sm:col-span-6">
                 <label
-                    htmlFor="last-name"
+                    htmlFor="exemptions"
                     className="indent-1 block text-sm/6 font-medium text-gray-950"
                 >
                     Exempt payee code (if any):
                 </label>
                 <div className="mt-2">
                     <input
-                        id="last-name"
-                        name="last-name"
+                        id="exemptions"
+                        name="exemptions"
                         type="text"
                         autoComplete="family-name"
                         className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
@@ -404,6 +424,7 @@ export default function W9Form() {
                 </div>
             </div>
             <button
+            onClick={handleSubmit(onSubmit)}
                 type="button"
                 className="rounded-md mt-10 mx-auto block bg-blue-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-xs hover:bg-blue-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
             >
