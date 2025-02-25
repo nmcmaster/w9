@@ -21,7 +21,7 @@ Here are the fillable fields in FW9.pdf:
    - Employer identification number (Text field with formatted input)
 9. **Part II**:
    - Signature field (Digital/Physical signature)
-   - Date field (Date input)
+   - Date field (Date input)`
 
 These fields use AcroForms with the following naming conventions:
 - `taxpayer.name` (Line 1)

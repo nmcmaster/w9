@@ -1,5 +1,6 @@
 "use client";
 import { useMask, format } from "@react-input/mask";
+import { useForm, SubmitHandler } from "react-hook-form";
 
 export default function W9Form() {
     const ssn = useMask({
@@ -12,7 +13,7 @@ export default function W9Form() {
     });
 
     return (
-        <div className="border-b border-gray-900/10 pb-12">
+        <form className="border-b border-gray-900/10 pb-12">
             <h2 className="text-base/7 font-semibold text-gray-900">
                 Create W9 Form
             </h2>
@@ -72,7 +73,7 @@ export default function W9Form() {
                         <span className="font-bold">3a.</span> Check the
                         appropriate box for federal tax classification of the
                         entity/individual whose name is listed in the first
-                        field.
+                        field:
                     </label>
                     <div className="mt-2 grid grid-cols-1">
                         <select
@@ -200,7 +201,7 @@ export default function W9Form() {
                     className="block text-sm/6 font-medium text-gray-950"
                 >
                     <span className="font-bold"> 5.</span> Address (number,
-                    street, and apt. or suite no.):
+                    street, and apt. or suite #):
                 </label>
                 <div className="mt-2">
                     <input
@@ -280,13 +281,13 @@ export default function W9Form() {
                             id="last-name"
                             name="last-name"
                             type="text"
-                                                 className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                            className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                         />
                     </div>
                 </div>
 
                 <div className="mt-4 text-center font-bold pt-0.5 sm:col-span-2">
-                 OR
+                    OR
                 </div>
                 <div className="mt-4 sm:col-span-2">
                     <label
@@ -388,6 +389,6 @@ export default function W9Form() {
             >
                 Create Completed W9 Form
             </button>
-        </div>
+        </form>
     );
 }
