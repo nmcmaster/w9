@@ -12,6 +12,26 @@ export default function W9Form() {
         replacement: { _: /\d/ },
     });
 
+    type W9FormData = {
+        taxpayerName: string;
+        businessName: string;
+        taxClassification: string;
+        taxClassificationIsLLC: boolean;
+        llcTaxClassification: string; // C, S, or P
+        foreignPartners: boolean;
+        exemptPayeeCode?: string;
+        classificationIsOther?: string; 
+        fatcaCode: string;
+        address: string;
+        cityStateZip: string;
+        accountNumbers?: string;
+        tin: string;
+        tinType: "ssn" | "ein";
+        signature: string;
+        date: string;
+        requesterNameAddress?: string;
+    };
+
     return (
         <form className="border-b border-gray-900/10 pb-12">
             <h2 className="text-base/7 font-semibold text-gray-900">
@@ -42,7 +62,7 @@ export default function W9Form() {
                     <div className="mt-1 text-xs/5 px-3 text-gray-600">
                         (For a sole proprietor or disregarded entity, enter the
                         owner’s name on line 1, and enter the
-                        business/disregarded entity’s name on line 2.)
+                        business/disregarded entity’s name on line 2)
                     </div>
                 </div>
 
